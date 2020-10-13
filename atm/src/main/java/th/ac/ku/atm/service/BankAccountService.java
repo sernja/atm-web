@@ -19,26 +19,32 @@ public class BankAccountService {
         this.restTemplate = restTemplate;
     }
 
+    public List<BankAccount> getBankAccountList(){
+        String url = "http://localhost:8091/api/bankaccount" ;
+        ResponseEntity<BankAccount[]> response = restTemplate.getForEntity(url, BankAccount[].class);
+
+        BankAccount[] accounts = response.getBody();
+
+        return Arrays.asList(accounts);
+    }
+
     public List<BankAccount> getCustomerBankAccount(int customerId) {
-        String url = "http://localhost:8091/api/bankaccount/customer/" +
-                customerId;
-        ResponseEntity<BankAccount[]> response =
-                restTemplate.getForEntity(url, BankAccount[].class);
+        String url = "http://localhost:8091/api/bankaccount/customer/" + customerId;
+        ResponseEntity<BankAccount[]> response = restTemplate.getForEntity(url, BankAccount[].class);
 
         BankAccount[] accounts = response.getBody();
 
         return Arrays.asList(accounts);
     }
 
-    public List<BankAccount> getBankAccounts(){
-        String url = "http://localhost:8091/api/bankaccount";
-        ResponseEntity<BankAccount[]> response =
-                restTemplate.getForEntity(url, BankAccount[].class);
-
-        BankAccount[] accounts = response.getBody();
-
-        return Arrays.asList(accounts);
-    }
+//    public List<BankAccount> getBankAccounts(){
+//        String url = "http://localhost:8091/api/bankaccount";
+//        ResponseEntity<BankAccount[]> response = restTemplate.getForEntity(url, BankAccount[].class);
+//
+//        BankAccount[] accounts = response.getBody();
+//
+//        return Arrays.asList(accounts);
+//    }
 
     public void openAccount(BankAccount bankAccount) {
         String url = "http://localhost:8091/api/bankaccount";
@@ -69,7 +75,7 @@ public class BankAccountService {
         restTemplate.put(url, bankAccount);
     }
 
-//    public ArrayList<BankAccount> getBankAccounts() {
-//        return new ArrayList<>(this.bankAccounts);
-//    }
+    public ArrayList<BankAccount> getBankAccounts() {
+        return new ArrayList<>(this.bankAccounts);
+    }
 }

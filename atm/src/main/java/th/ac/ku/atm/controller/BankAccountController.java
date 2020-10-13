@@ -37,9 +37,7 @@ public class BankAccountController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editAccount(@PathVariable int id,
-                              @ModelAttribute BankAccount bankAccount,
-                              Model model) {
+    public String editAccount(@PathVariable int id, @ModelAttribute BankAccount bankAccount, Model model) {
 
         bankAccountService.editBankAccount(bankAccount);
         model.addAttribute("bankaccounts",bankAccountService.getBankAccounts());
